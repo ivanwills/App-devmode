@@ -17,6 +17,7 @@ use List::MoreUtils qw/uniq/;
 use Path::Class;
 use Term::Title 'set_titlebar';
 use Term::ANSIColor qw/colored/;
+use YAML::Syck qw/LoadFile DumpFile/;
 
 our $VERSION   = version->new('0.0.5');
 my ($PROGNAME) = $PROGRAM_NAME =~ m{^.*/(.*?)$}mxs;
@@ -196,7 +197,7 @@ sub main {
 
     # task defaults
     if ( -e "$HOME/.devmode/$lc_task.rc" ) {
-        my $config = eval file("$HOME/.devmode/$lc_task.rc")->slurp;  ## no critic
+        my $config = require "$HOME/.devmode/$lc_task.rc";
         for my $key ( keys %{ $config } ) {
             if ( !exists $option{$key} ) {
                 $option{$key} = $config->{$key};
@@ -459,7 +460,7 @@ sub remote_cache {
     my $cache_file = file('/tmp/devmode_remoter_cache');
 
     if ( -f $cache_file ) {
-        $cache = eval '' . $cache_file->slurp;
+        $cache = LoadFile($cache_file);
     }
 
     # check the cache is fresh (1 day)
@@ -481,7 +482,7 @@ sub remote_cache {
             '' . `ssh $option{server} '/bin/ls -1 ~/.devmode/[^.#]*'`
         ];
 
-    print { $cache_file->openw } 'my ' . Dumper $cache;
+    DumpFile($cache_file, $cache);
 
     return @{ $cache->{$server}{modes} };
 }
