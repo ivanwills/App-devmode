@@ -17,4 +17,6 @@ nytprof*
 .prove
 tmp*
 *~
+vim.sh
+temp*
 errors.err

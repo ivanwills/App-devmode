@@ -541,7 +541,7 @@ $HOME/.devmode/template/, the default template creates a session that always
 opens to the directory that devmode was run from, it is aimed at working with
 perl packages.
 
-=head2 BASH autocompletion
+=head2 BASH auto-completion
 
  _devmode() {
      local cur prev opts

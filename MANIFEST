@@ -6,12 +6,15 @@ MANIFEST.SKIP
 META.yml
 Makefile.PL
 README
+bin/devmode
 lib/App/devmode.pm
 t/00-load.t
 t/boilerplate.t
 t/critic.t
 t/kwalitee.t
+t/manifest.t
 t/pod-coverage.t
 t/pod.t
 t/perlcriticrc
 t/spelling.t
+META.json
