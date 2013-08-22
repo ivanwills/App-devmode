@@ -39,12 +39,12 @@ __END__
 
 =head1 NAME
 
-App::devmode - <One-line description of module's purpose>
+App::devmode - Simple wrapper for screen that permits running of multiple
+screen configs for different tasks.
 
 =head1 VERSION
 
 This documentation refers to App::devmode version 0.0.1
-
 
 =head1 SYNOPSIS
 
@@ -84,9 +84,6 @@ Param: C<$search> - type (detail) - description
 Return: App::devmode -
 
 Description:
-
-=cut
-
 
 =head1 DIAGNOSTICS
 
