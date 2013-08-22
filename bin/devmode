@@ -488,7 +488,7 @@ sub remote_cache {
 
 =head1 NAME
 
-devmode - Simple wrapper for screen that permits running of multiple screen configs for different tasks
+devmode - Wrapper for GNU screen to manage multiple screenrc files
 
 =head1 VERSION
 
@@ -582,11 +582,11 @@ Patches are welcome.
 =head1 AUTHOR
 
 Shannon Wynter - (http://fremnet.net/contact) (original)
-Ivan Wills (ivan.wills@gmail.com)
+Ivan Wills  - (ivan.wills@gmail.com)
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2007 Shannon Wynter, 2007-2011 Ivan Wills.
+Copyright (c) 2007 Shannon Wynter, 2007-2013 Ivan Wills.
 All rights reserved.
 
 =cut
