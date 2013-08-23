@@ -31,5 +31,6 @@ add_stopwords(qw/
     Wynter
     configs
     devmode
+    screenrc
 /);
 all_pod_files_spelling_ok();
