@@ -113,6 +113,7 @@ sub main {
         'server|s=s',
         'auto|A=s',
         'current|C=s',
+        'remote_opt|remote-opt|o=s',
         'pre_cmd|pre-cmd|pre=s',
         'post_cmd|post-cmd|post=s',
         'test|T',
@@ -139,6 +140,18 @@ sub main {
 
     my %session = get_sessions();
 
+    # Make upper and lower case versions of the task name
+    # All filenames are lower case
+    # All session names are upper case
+    my $uc_task = uc $task;
+    my $lc_task = lc $task;
+
+    # task defaults
+    my $config;
+    if ( -e "$HOME/.devmode/$lc_task.rc" ) {
+        $config = require "$HOME/.devmode/$lc_task.rc";
+    }
+
     if ($option{'server'}) {
         my $mode  = shift @ARGV;
         my $reset = 'reset;';
@@ -148,8 +161,10 @@ sub main {
             $reset = '';
             $ssh   = 'ssh';
         }
-        return print "$ssh $option{server} '$reset devmode $mode'\n" if $option{test};
-        return exec "$ssh $option{server} '$reset devmode $mode'";
+        push @ARGV, $config->{remote_opt} if $config->{remote_opt};
+
+        return print "$ssh @ARGV $option{server} '$reset devmode $mode'\n" if $option{test};
+        return exec  "$ssh @ARGV $option{server} '$reset devmode $mode'";
     }
     elsif ($option{'list'}) {
         my $count = 0;
@@ -179,25 +194,13 @@ sub main {
         exit $count;
     }
 
-    # Make upper and lower case versions of the task name
-    # All filenames are lower case
-    # All session names are upper case
-    my $uc_task = uc $task;
-    my $lc_task = lc $task;
-
-    my @screen_opts = (
-        "-S $uc_task",
-    );
-
-    if ( $option{create} && !-e "$HOME/.devmode/$lc_task" ) {
+    if ( $option{create} && !-f "$HOME/.devmode/$lc_task" ) {
         my $task = create_task( $task, $option{template} || 'rc', "$ENV{HOME}/.devmode/" );
 
         exec 'vim', $task;
     }
 
-    # task defaults
-    if ( -e "$HOME/.devmode/$lc_task.rc" ) {
-        my $config = require "$HOME/.devmode/$lc_task.rc";
+    if ($config) {
         for my $key ( keys %{ $config } ) {
             if ( !exists $option{$key} ) {
                 $option{$key} = $config->{$key};
@@ -246,6 +249,10 @@ sub main {
     }
 
     system $option{pre_cmds} if $option{pre_cmds};
+
+    my @screen_opts = (
+        "-S $uc_task",
+    );
 
     # Per session config?
     if (-e "$HOME/.devmode/$lc_task") {
