@@ -5,8 +5,7 @@ use warnings;
 use Test::More;
 use Path::Class;
 
-my $base = file($0)->parent->parent;
-my $lib  = $base->subdir('lib');
+my $lib = file($0)->parent->parent->subdir('lib');
 my @files = $lib->children;
 
 while ( my $file = shift @files ) {
@@ -26,6 +25,8 @@ while ( my $file = shift @files ) {
         push @files, $file->children;
     }
     elsif ( $file !~ /[.]sw[ponx]$/ ) {
+        my ($bang) = $file->slurp;
+        next if $bang !~ /perl/;
         ok !(system qw/perl -Ilib -c /, $file), "$file compiles";
     }
 }
