@@ -24,8 +24,7 @@ __END__
 
 =head1 NAME
 
-App::devmode - Simple wrapper for screen that permits running of multiple
-screen configs for different tasks.
+App::devmode - Simple wrapper for screen that permits running of multiple screen configs for different tasks.
 
 =head1 VERSION
 
