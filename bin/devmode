@@ -596,6 +596,26 @@ perl packages.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
+The <Cdevmode> program uses 3 different types of configuration files:
+
+=over 4
+
+=item Screen
+
+Stored in C<~/.devmode/[name]> are standart GNU Screen files.
+
+=item mode
+
+Each mode file can have a C,~/.devmode[mode].rc> to chande default configuration.
+It is stored in YAML format.
+
+=item global
+
+Stored inC<`/.devmode.rc> sets global defaults.
+It is stored in YAML format.
+
+=back
+
 =head1 DEPENDENCIES
 
 =head1 INCOMPATIBILITIES
