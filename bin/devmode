@@ -147,10 +147,7 @@ sub main {
     my $lc_task = lc $task;
 
     # task defaults
-    my $config;
-    if ( -e "$HOME/.devmode/$lc_task.rc" ) {
-        $config = require "$HOME/.devmode/$lc_task.rc";
-    }
+    my $config = config($lc_task);
 
     if ($option{'server'}) {
         my $mode  = shift @ARGV;
@@ -492,6 +489,30 @@ sub remote_cache {
     DumpFile($cache_file, $cache);
 
     return @{ $cache->{$server}{modes} };
+}
+
+sub config {
+    my ($base) = @_;
+    my $base_config = "$HOME/.devmode/$base.rc";
+    my $devmode     = "$HOME/.devmode.rc";
+    my $config      = {};
+
+    if ( -e $base_config ) {
+        $config = eval { LoadFile($base_config) };
+
+        # if no config found and we have an error assume that the file is old
+        # format and try to require it and convert to YAML.
+        if ( !$config && $@ ) {
+            $config = require $base_config;
+            DumpFile($base_config, $config);
+        }
+    }
+
+    if ( -e $devmode ) {
+        $config = { %{ LoadFile($devmode) }, %$config };
+    }
+
+    return $config
 }
 
 =head1 NAME
