@@ -87,3 +87,5 @@ vim.sh
 tmp*
 temp*
 errors.err
+.perl.tag
+Debian_CPANTS.txt
