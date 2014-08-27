@@ -377,29 +377,29 @@ sub auto {
     if ( $type eq 'ssh' ) {
         my @hosts
             = map {
-                s/#.*$//;
-                my ($addr, @a) = split /\s+/, $_;
+                /(.*?)(?:#.*)?$/;
+                my ($addr, @a) = split /\s+/, $1;
                 @a;
             }
             grep {
                 !/^\s*$/ && !/^\s*#/
             }
             map {
-                s/\n//;
-                $_
+                /(.*)\n/;
+                $1 || $_
             }
             file('/etc/hosts')->slurp;
         push @hosts,
             map {
-                s/Host\s*//;
-                $_;
+                /(?:Host\s*)?(.*)/;
+                $1;
             }
             grep {
                 /^Host /
             }
             map {
-                s/\n//;
-                $_
+                /(.*)\n/;
+                $1 || $_
             }
             file("$ENV{HOME}/.ssh/config")->slurp;
         print join ' ', uniq sort @hosts;
@@ -479,8 +479,8 @@ sub remote_cache {
                 !/[.]rc$/ && !/^#/
             }
             map {
-                s{^.*/}{};
-                $_
+                m{^(?:.*/)(.*)};
+                $1
             }
             split /\n/,
             '' . `ssh $option{server} '/bin/ls -1 ~/.devmode/[^.#]*'`
@@ -602,11 +602,11 @@ The <Cdevmode> program uses 3 different types of configuration files:
 
 =item Screen
 
-Stored in C<~/.devmode/[name]> are standart GNU Screen files.
+Stored in C<~/.devmode/[name]> are standard GNU Screen files.
 
 =item mode
 
-Each mode file can have a C,~/.devmode[mode].rc> to chande default configuration.
+Each mode file can have a C,~/.devmode[mode].rc> to change default configuration.
 It is stored in YAML format.
 
 =item global
