@@ -2,35 +2,12 @@
 
 use strict;
 use warnings;
-use Test::More;
-use Path::Class;
+use FindBin qw/$Bin/;
 
-my $base = file($0)->parent->parent;
-my $lib = $base->subdir('lib');
-my @files = $lib->children;
+use Test::More tests => 2;
 
-while ( my $file = shift @files ) {
-    if ( -d $file ) {
-        push @files, $file->children;
-    }
-    elsif ( $file =~ /[.]pm$/ ) {
-        require_ok $file;
-    }
-}
-
-my $bin = $base->subdir('bin');
-@files = $bin->children;
-
-while ( my $file = shift @files ) {
-    if ( -d $file ) {
-        push @files, $file->children;
-    }
-    elsif ( $file !~ /[.]sw[ponx]$/ ) {
-        my ($bang) = $file->slurp;
-        next if $bang !~ /perl/;
-        ok !(system qw/perl -Ilib -c /, $file), "$file compiles";
-    }
-}
+use_ok('App::devmode');
+ok( !(system 'perl', "-I $Bin/../lib", '-c', "$Bin/../bin/devmode"), "bin/devmode compiles");
 
 diag( "Testing App::devmode $App::devmode::VERSION, Perl $], $^X" );
 done_testing();
