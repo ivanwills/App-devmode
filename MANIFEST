@@ -5,7 +5,7 @@ MANIFEST
 MANIFEST.SKIP
 META.yml
 Makefile.PL
-README
+README.pod
 bin/devmode
 lib/App/devmode.pm
 t/00-load.t
