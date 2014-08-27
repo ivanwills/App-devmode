@@ -521,7 +521,7 @@ devmode - Wrapper for GNU screen to manage multiple screenrc files
 
 =head1 VERSION
 
-This documentation refers to devmode version 0.0.1.
+This documentation refers to devmode version 0.0.5.
 
 =head1 SYNOPSIS
 
