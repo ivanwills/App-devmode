@@ -15,7 +15,6 @@ use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use List::MoreUtils qw/uniq/;
 use Path::Class;
-use Term::Title 'set_titlebar';
 use Term::ANSIColor qw/colored/;
 use YAML::Syck qw/LoadFile DumpFile/;
 
@@ -211,7 +210,8 @@ sub main {
     else {
         $option{short} = length $task > 8 if !exists $option{short};
 
-        set_titlebar(
+        require Term::Title;
+        Term::Title::set_titlebar(
             ( $option{short} ? '' : "Devmode " )
             . ( $option{title_bar} || $task )
         );
@@ -335,7 +335,8 @@ sub protect {
 sub force_title {
     my ($task) = @_;
 
-    set_titlebar(
+    require Term::Title;
+    Term::Title::set_titlebar(
         ( $option{short} ? '' : "Devmode " )
         . ( $option{title_bar} || $task )
     );
