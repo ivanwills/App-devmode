@@ -18,7 +18,7 @@ use Path::Class;
 use Term::ANSIColor qw/colored/;
 use YAML qw/LoadFile DumpFile/;
 
-our $VERSION   = version->new('0.0.7');
+our $VERSION   = version->new('0.0.8');
 my ($PROGNAME) = $PROGRAM_NAME =~ m{^.*/(.*?)$}mxs;
 my $HOME       = $ENV{HOME};
 my $SCREEN     = '/usr/bin/screen';
@@ -522,7 +522,7 @@ devmode - Wrapper for GNU screen to manage multiple screenrc files
 
 =head1 VERSION
 
-This documentation refers to devmode version 0.0.7.
+This documentation refers to devmode version 0.0.8.
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,8 @@
 Revision history for App-devmode
 
+0.0.8   2014-09-14
+        Fixed test to use correct perl version (Ivan Wills)
+
 0.0.7   2014-09-14
         Changed to using old YAML as YAML::Syck seems to not work in newer perl versions (Ivan Wills)
 
