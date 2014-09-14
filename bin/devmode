@@ -16,7 +16,7 @@ use English qw/ -no_match_vars /;
 use List::MoreUtils qw/uniq/;
 use Path::Class;
 use Term::ANSIColor qw/colored/;
-use YAML::Syck qw/LoadFile DumpFile/;
+use YAML qw/LoadFile DumpFile/;
 
 our $VERSION   = version->new('0.0.6');
 my ($PROGNAME) = $PROGRAM_NAME =~ m{^.*/(.*?)$}mxs;

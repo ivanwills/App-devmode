@@ -15,7 +15,7 @@ my $builder = Module::Build->new(
         'Template::Provider::FromDATA' => 0,
         'Term::Title'                  => 0,
         'Test::NoWarnings'             => 0,
-        'YAML::Syck'                   => 0,
+        YAML                           => 0,
         'version'                      => 0,
     },
     configure_requires => {
