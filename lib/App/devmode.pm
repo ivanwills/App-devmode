@@ -14,7 +14,7 @@ use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
-our $VERSION     = version->new('0.0.6');
+our $VERSION     = version->new('0.0.7');
 our @EXPORT_OK   = qw//;
 our %EXPORT_TAGS = ();
 
@@ -28,7 +28,7 @@ App::devmode - Simple wrapper for screen that permits running of multiple screen
 
 =head1 VERSION
 
-This documentation refers to App::devmode version 0.0.6
+This documentation refers to App::devmode version 0.0.7
 
 =head1 SYNOPSIS
 

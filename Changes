@@ -1,5 +1,8 @@
 Revision history for App-devmode
 
+0.0.7   2014-09-14
+        Changed to using old YAML as YAML::Syck seems to not work in newer perl versions (Ivan Wills)
+
 0.0.6   2014-08-30
         Updated boilerplate test (Ivan Wills)
         Moved loading Term::Title to only when needed (Ivan Wills)
